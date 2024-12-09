@@ -37,7 +37,6 @@ function App() {
       const day = new Date(year, month, i + 1);
       return day.toLocaleDateString("en-GB", {
         day: "2-digit",
-        month: "2-digit",
       });
     });
   }

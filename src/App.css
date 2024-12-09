@@ -134,7 +134,6 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .worker-row {
-  display: flex;
   justify-content: space-between;
   padding: 10px;
   margin-bottom: 10px;
@@ -143,7 +142,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .worker-row input {
-  width: 60px;
+  width: 35px;
   padding: 5px;
   text-align: center;
 }
@@ -189,4 +188,109 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .summary-workers {
   height: 30px;
+}
+
+.inputName {
+  width: 100px !important;
+}
+
+@media (max-width: 480px) {
+  button {
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+
+  button,
+  input {
+    width: 100%; /* Make buttons take the full container width */
+    max-width: 300px; /* Set a max-width for better alignment */
+  }
+
+  /* Make the form width narrower for small screens */
+  .pincode-container,
+  .tracker-container {
+    width: 90%;
+  }
+
+  /* Adjust summary spacing */
+  .summary {
+    margin: 10px 0;
+    padding: 8px;
+  }
+
+  .summary h3 {
+    font-size: 16px;
+  }
+
+  .summary p {
+    font-size: 14px;
+  }
+
+  /* Adjust table input sizes */
+  td input {
+    width: 30px;
+    font-size: 10px;
+    padding: 2px;
+  }
+
+  /* Adjust worker-row layout further */
+  .worker-row {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center; /* Center buttons horizontally */
+    gap: 10px; /* Optional: Add spacing between buttons */
+  }
+
+  .worker-row span,
+  .worker-row input {
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+
+  /* Mobile-specific styles */
+  .mobile-worker-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .worker-dropdown {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #ffffff;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .worker-dropdown summary {
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+
+  .worker-hours {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .worker-hour-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .worker-hour-entry label {
+    font-size: 14px;
+    color: #555;
+  }
+
+  .worker-hour-entry input {
+    width: 35px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
 }
