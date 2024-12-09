@@ -10,13 +10,18 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
-import PincodeAuth from "./PincodeAuth"; // Import the PincodeAuth component
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth"; // Import auth functions
 import "./App.css";
 
 function App() {
   const [workers, setWorkers] = useState([]);
   const [days, setDays] = useState(getDaysInMonth());
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [email, setEmail] = useState(""); // Manage email input
+  const [password, setPassword] = useState(""); // Manage password input
+  const [error, setError] = useState(""); // Handle errors
+
+  const auth = getAuth(); // Get the auth instance
 
   // Firestore collection reference
   const workersCollection = collection(db, "workers");
@@ -70,38 +75,49 @@ function App() {
     setWorkers(updatedWorkers);
   };
 
-  // Check if the user is authenticated from localStorage
+  // Handle authentication state change
   useEffect(() => {
-    const storedAuthentication = localStorage.getItem("isAuthenticated");
-    if (storedAuthentication === "true") {
-      setIsAuthenticated(true); // Set the state to authenticated if stored in localStorage
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
+      }
+    });
+    return unsubscribe;
+  }, [auth]);
+
+  // Handle login
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      setEmail("");
+      setPassword("");
+    } catch (err) {
+      setError("Failed to login. Please check your credentials.");
     }
-  }, []);
+  };
 
-  // Handle successful authentication
-  const handleAuthentication = (status) => {
-    setIsAuthenticated(status);
-
-    // If authenticated, store this in localStorage
-    if (status) {
-      localStorage.setItem("isAuthenticated", "true");
+  // Handle logout
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+    } catch (err) {
+      console.error("Error during logout:", err);
     }
   };
 
   // Reset all workers' hours to zero
   const resetHours = async () => {
     try {
-      // Create an array of promises to reset all worker hours in Firestore
       const resetPromises = workers.map((worker) => {
         const updatedWorker = { ...worker, hours: Array(days.length).fill(0) };
         const workerDoc = doc(db, "workers", worker.id);
         return updateDoc(workerDoc, { hours: updatedWorker.hours });
       });
-
-      // Wait for all update operations to finish
       await Promise.all(resetPromises);
 
-      // Update the local state with reset hours
       const updatedWorkers = workers.map((worker) => ({
         ...worker,
         hours: Array(days.length).fill(0),
@@ -113,22 +129,38 @@ function App() {
     }
   };
 
-  // If not authenticated, show pincode authentication
+  // Main app content after authentication
   if (!isAuthenticated) {
     return (
-      <div className="container">
-        <div className="pincode-container">
-          <PincodeAuth onAuthenticated={handleAuthentication} />
-        </div>
+      <div className="auth-container">
+        <h2>Login</h2>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        <form onSubmit={handleLogin}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit">Login</button>
+        </form>
       </div>
     );
   }
 
-  // Main app content after authentication
   return (
     <div className="container">
       <div className="tracker-container">
         <img src="/kaiyo-logo.png" alt="Kaiyo Logo" className="logo" />
+        <button onClick={handleLogout}>Logout</button>
         <WorkerHoursForm
           workers={workers}
           days={days}
