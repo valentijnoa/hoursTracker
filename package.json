@@ -1,7 +1,7 @@
 {
   "name": "work-hours-tracker",
   "version": "0.1.0",
-  "homepage": "https://gitname.github.io/urentrackerkaiyo",
+  "homepage": "https://gitname.github.io/hoursTracker",
   "private": true,
   "dependencies": {
     "@firebase/firestore": "^4.7.5",
