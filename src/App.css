@@ -1,0 +1,192 @@
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+input,
+button {
+  font-size: 16px;
+}
+
+input[type="password"] {
+  padding: 10px;
+  width: 200px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input {
+  border: solid 1px black;
+  margin-right: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #e30613;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+button:hover {
+  background-color: #96030c;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px; /* Add space between table and other content */
+}
+
+/* Optional: Make the table scrollable horizontally if it exceeds the container */
+.worker-list,
+.summary-container {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Optional: Add spacing between rows for readability */
+tbody tr {
+  height: 40px; /* Add height to make the rows more spaced out */
+}
+
+/* Optional: Style input fields */
+td input {
+  width: 35px;
+  text-align: center;
+  font-size: 12px;
+  padding: 4px;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+  -webkit-appearance: none; /* Chrome, Safari, Opera */
+  appearance: none; /* Standard */
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+/* Container Styles */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Pincode Authentication */
+.pincode-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Work Hours Tracker */
+.tracker-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 95%;
+  width: 100%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.summary-container {
+  margin-top: 20px;
+}
+
+.worker-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.worker-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fafafa;
+  border-radius: 5px;
+}
+
+.worker-row input {
+  width: 60px;
+  padding: 5px;
+  text-align: center;
+}
+
+.worker-row span {
+  font-weight: bold;
+}
+
+/* Logo Styles */
+.logo {
+  max-width: 150px; /* Adjust the size of the logo */
+  margin-bottom: 20px; /* Space between logo and the form */
+}
+
+/* Summary Section */
+.summary {
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* Flexbox layout for each worker's name and hours */
+.summary > div {
+  display: flex;
+  align-items: center; /* Vertically center the items */
+  justify-content: space-between;
+}
+
+/* Style the h3 (worker name) */
+.summary h3 {
+  margin-right: 10px; /* Space between name and hours */
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Style the p (total hours) */
+.summary p {
+  font-size: 16px;
+  margin: 0; /* Remove default margin to align better */
+  text-align: right;
+}
+
+.summary-workers {
+  height: 30px;
+}
