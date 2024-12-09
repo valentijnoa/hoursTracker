@@ -159,7 +159,7 @@ function App() {
   return (
     <div className="container">
       <div className="tracker-container">
-        <img src="/kaiyo-logo.png" alt="Kaiyo Logo" className="logo" />
+        <img src="kaiyo-logo.png" alt="Kaiyo Logo" className="logo" />
         <button onClick={handleLogout}>Logout</button>
         <WorkerHoursForm
           workers={workers}
