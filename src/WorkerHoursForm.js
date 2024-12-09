@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase"; // Import your Firebase auth instance
+import React, { useState } from "react";
 
 function WorkerHoursForm({
   workers,
@@ -10,20 +8,6 @@ function WorkerHoursForm({
   onResetHours,
 }) {
   const [newWorker, setNewWorker] = useState("");
-  const [userEmail, setUserEmail] = useState(null);
-
-  // Check the authenticated user's email
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUserEmail(user.email); // Get the logged-in user's email
-      } else {
-        setUserEmail(null); // No user is logged in
-      }
-    });
-
-    return () => unsubscribe(); // Clean up the subscription
-  }, []);
 
   const handleAddWorker = () => {
     if (newWorker.trim()) {
@@ -44,24 +28,21 @@ function WorkerHoursForm({
       />
       <button onClick={handleAddWorker}>Werknemer Toevoegen</button>
 
-      {/* Only show the Reset button if the user email matches */}
-      {userEmail === "kaiyo@email.com" && (
-        <button onClick={onResetHours}>Reset Alle Uren</button>
-      )}
+      <button onClick={onResetHours}>Reset Alle Uren</button>
 
       <table className="workerTable">
         <thead>
           <tr>
             <th>Datum</th>
             {days.map((day, dayIndex) => (
-              <th key={dayIndex}>{day}</th>
+              <th key={dayIndex}>{day}</th> // Dates at the top, only once
             ))}
           </tr>
         </thead>
         <tbody>
           {workers.map((worker, workerIndex) => (
             <tr key={workerIndex}>
-              <td>{worker.name}</td>
+              <td>{worker.name}</td> {/* Worker name in the first column */}
               {days.map((_, dayIndex) => (
                 <td key={dayIndex}>
                   <input
