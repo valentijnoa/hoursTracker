@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/hoursTracker/static/css/main.24f19e8b.css",
-    "main.js": "/hoursTracker/static/js/main.d54620db.js",
+    "main.js": "/hoursTracker/static/js/main.86961f70.js",
     "static/js/488.6277ea5b.chunk.js": "/hoursTracker/static/js/488.6277ea5b.chunk.js",
     "index.html": "/hoursTracker/index.html",
     "main.24f19e8b.css.map": "/hoursTracker/static/css/main.24f19e8b.css.map",
-    "main.d54620db.js.map": "/hoursTracker/static/js/main.d54620db.js.map",
+    "main.86961f70.js.map": "/hoursTracker/static/js/main.86961f70.js.map",
     "488.6277ea5b.chunk.js.map": "/hoursTracker/static/js/488.6277ea5b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.24f19e8b.css",
-    "static/js/main.d54620db.js"
+    "static/js/main.86961f70.js"
   ]
 }
