@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import WorkerHoursForm from "./WorkerHoursForm";
 import Summary from "./Summary";
 import { db } from "./firebase";
-import { deleteDoc } from "firebase/firestore";
 import {
   collection,
   addDoc,
@@ -56,7 +55,7 @@ function App() {
 
   // Add a new worker
   const addWorker = async (name) => {
-    const newWorker = { name, hours: Array(days.length).fill(0) };
+    const newWorker = { name, hours: Array(days.length).fill("") };
     const docRef = await addDoc(workersCollection, newWorker);
     setWorkers([...workers, { ...newWorker, id: docRef.id }]);
   };
@@ -111,7 +110,7 @@ function App() {
   const resetHours = async () => {
     try {
       const resetPromises = workers.map((worker) => {
-        const updatedWorker = { ...worker, hours: Array(days.length).fill(0) };
+        const updatedWorker = { ...worker, hours: Array(days.length).fill("") };
         const workerDoc = doc(db, "workers", worker.id);
         return updateDoc(workerDoc, { hours: updatedWorker.hours });
       });
@@ -119,7 +118,7 @@ function App() {
 
       const updatedWorkers = workers.map((worker) => ({
         ...worker,
-        hours: Array(days.length).fill(0),
+        hours: Array(days.length).fill(""),
       }));
 
       setWorkers(updatedWorkers);

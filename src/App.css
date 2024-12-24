@@ -194,6 +194,10 @@ input[type="number"]::-webkit-inner-spin-button {
   width: 100px !important;
 }
 
+.workerTable tbody tr:nth-child(odd) {
+  background: #e3e3e3;
+}
+
 @media (max-width: 480px) {
   button {
     padding: 8px 15px;
