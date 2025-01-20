@@ -62,15 +62,23 @@ function App() {
 
   // Update worker hours
   const updateHours = async (workerIndex, dayIndex, value) => {
-    const updatedWorkers = [...workers];
-    updatedWorkers[workerIndex].hours[dayIndex] = value;
+    // Prevent empty input
+    if (value === "") {
+      value = "0"; // Revert to default value
+    }
 
-    // Update in Firestore
-    const workerId = updatedWorkers[workerIndex].id;
-    const workerDoc = doc(db, "workers", workerId);
-    await updateDoc(workerDoc, { hours: updatedWorkers[workerIndex].hours });
+    // Validate input to ensure only numbers are accepted
+    if (!isNaN(value) && Number(value) >= 0) {
+      const updatedWorkers = [...workers];
+      updatedWorkers[workerIndex].hours[dayIndex] = value;
 
-    setWorkers(updatedWorkers);
+      // Update in Firestore
+      const workerId = updatedWorkers[workerIndex].id;
+      const workerDoc = doc(db, "workers", workerId);
+      await updateDoc(workerDoc, { hours: updatedWorkers[workerIndex].hours });
+
+      setWorkers(updatedWorkers);
+    }
   };
 
   // Handle authentication state change
