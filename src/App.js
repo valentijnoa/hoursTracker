@@ -27,17 +27,9 @@ function App() {
 
   // Generate days for the current month
   function getDaysInMonth() {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth(); // Current month (0-indexed)
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-    return Array.from({ length: daysInMonth }, (_, i) => {
-      const day = new Date(year, month, i + 1);
-      return day.toLocaleDateString("en-GB", {
-        day: "2-digit",
-      });
-    });
+    return Array.from({ length: 31 }, (_, i) =>
+      (i + 1).toString().padStart(2, "0")
+    );
   }
 
   // Load workers from Firestore on mount
