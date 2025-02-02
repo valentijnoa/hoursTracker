@@ -7,7 +7,10 @@ function Summary({ workers, days }) {
       {workers.map((worker, workerIndex) => (
         <div className="summary-workers" key={workerIndex}>
           <h3>{worker.name}</h3>
-          <p>uren: {worker.hours.reduce((sum, hour) => sum + hour, 0)}</p>
+          <p>
+            uren:{" "}
+            {worker.hours.reduce((sum, hour) => sum + (Number(hour) || 0), 0)}
+          </p>
         </div>
       ))}
     </div>

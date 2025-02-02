@@ -88,23 +88,24 @@ function App() {
   // Handle login
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError(""); // Reset errors
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      setEmail("");
-      setPassword("");
+      console.log("Login successful");
     } catch (err) {
-      setError("Failed to login. Please check your credentials.");
+      console.error("Login error:", err.message);
+      setError(err.message); // Display error message
     }
   };
 
-  // Handle logout
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-    } catch (err) {
-      console.error("Error during logout:", err);
-    }
-  };
+  // // Handle logout
+  // const handleLogout = async () => {
+  //   try {
+  //     await signOut(auth);
+  //   } catch (err) {
+  //     console.error("Error during logout:", err);
+  //   }
+  // };
 
   // Reset all workers' hours to zero
   const resetHours = async () => {
@@ -158,7 +159,7 @@ function App() {
     <div className="container">
       <div className="tracker-container">
         <img src="kaiyo-logo.png" alt="Kaiyo Logo" className="logo" />
-        <button onClick={handleLogout}>Logout</button>
+        {/* <button onClick={handleLogout}>Logout</button> */}
         <WorkerHoursForm
           workers={workers}
           days={days}
